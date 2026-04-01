@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0F0F0F"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- ── App Title ── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="⬡  MEDIA PLAYER"
+            android:textColor="#E0E0E0"
+            android:textSize="20sp"
+            android:letterSpacing="0.15"
+            android:fontFamily="monospace"
+            android:paddingTop="12dp"
+            android:paddingBottom="4dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#2A2A2A"
+            android:layout_marginBottom="16dp" />
+
+        <!-- ── Video surface ── -->
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:visibility="gone"
+            android:background="#000000" />
+
+        <!-- ── Audio placeholder ── -->
+        <FrameLayout
+            android:id="@+id/audioVisualizer"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:background="#1A1A1A"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/ivMediaIcon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:src="@android:drawable/ic_media_play"
+                android:tint="#444444" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="12dp"
+                android:text="AUDIO"
+                android:textColor="#333333"
+                android:textSize="11sp"
+                android:letterSpacing="0.3"
+                android:fontFamily="monospace" />
+        </FrameLayout>
+
+        <!-- ── Title ── -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No media loaded"
+            android:textColor="#AAAAAA"
+            android:textSize="13sp"
+            android:fontFamily="monospace"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:paddingTop="14dp"
+            android:paddingBottom="2dp" />
+
+        <!-- ── Status ── -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ready"
+            android:textColor="#5C8EFF"
+            android:textSize="12sp"
+            android:fontFamily="monospace"
+            android:paddingBottom="12dp" />
+
+        <!-- ── Seek bar ── -->
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progressTint="#5C8EFF"
+            android:thumbTint="#5C8EFF"
+            android:enabled="false" />
+
+        <!-- ── Time row ── -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/tvCurrentTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0:00"
+                android:textColor="#666666"
+                android:textSize="11sp"
+                android:fontFamily="monospace" />
+
+            <TextView
+                android:id="@+id/tvTotalTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0:00"
+                android:textColor="#666666"
+                android:textSize="11sp"
+                android:fontFamily="monospace" />
+        </LinearLayout>
+
+        <!-- ── Transport controls ── -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingBottom="20dp">
+
+            <!-- Restart -->
+            <ImageButton
+                android:id="@+id/btnRestart"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_margin="6dp"
+                android:src="@android:drawable/ic_media_previous"
+                android:tint="#E0E0E0"
+                android:background="@drawable/btn_circle_bg"
+                android:enabled="false"
+                android:contentDescription="Restart" />
+
+            <!-- Stop -->
+            <ImageButton
+                android:id="@+id/btnStop"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_margin="6dp"
+                android:src="@android:drawable/ic_media_pause"
+                android:tint="#E0E0E0"
+                android:background="@drawable/btn_circle_bg"
+                android:enabled="false"
+                android:contentDescription="Stop" />
+
+            <!-- Play -->
+            <ImageButton
+                android:id="@+id/btnPlay"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_margin="6dp"
+                android:src="@android:drawable/ic_media_play"
+                android:tint="#0F0F0F"
+                android:background="@drawable/btn_circle_accent"
+                android:enabled="false"
+                android:contentDescription="Play" />
+
+            <!-- Pause -->
+            <ImageButton
+                android:id="@+id/btnPause"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_margin="6dp"
+                android:src="@android:drawable/ic_media_pause"
+                android:tint="#E0E0E0"
+                android:background="@drawable/btn_circle_bg"
+                android:enabled="false"
+                android:contentDescription="Pause" />
+
+            <!-- Next (unused placeholder shown as Stop icon) -->
+            <ImageButton
+                android:id="@+id/btnStopAlt"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_margin="6dp"
+                android:src="@android:drawable/ic_media_next"
+                android:tint="#333333"
+                android:background="@drawable/btn_circle_bg"
+                android:enabled="false"
+                android:contentDescription="Next" />
+
+        </LinearLayout>
+
+        <!-- ── Divider ── -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#1E1E1E"
+            android:layout_marginBottom="16dp" />
+
+        <!-- ── Source buttons ── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SOURCE"
+            android:textColor="#444444"
+            android:textSize="11sp"
+            android:letterSpacing="0.25"
+            android:fontFamily="monospace"
+            android:paddingBottom="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btnOpenFile"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:text="📁  Open File"
+                android:textColor="#E0E0E0"
+                android:backgroundTint="#1E1E1E"
+                android:textSize="13sp"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.05" />
+
+            <Button
+                android:id="@+id/btnOpenUrl"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:text="🌐  Open URL"
+                android:textColor="#5C8EFF"
+                android:backgroundTint="#0D1A3A"
+                android:textSize="13sp"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.05" />
+
+        </LinearLayout>
+
+        <!-- Bottom padding -->
+        <View android:layout_width="match_parent" android:layout_height="24dp" />
+
+    </LinearLayout>
+</ScrollView>

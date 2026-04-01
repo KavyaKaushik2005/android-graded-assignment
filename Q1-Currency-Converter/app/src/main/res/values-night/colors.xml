@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/values/colors.xml  →  DARK theme (default) -->
+<resources>
+    <color name="windowBackground">#000000</color>
+    <color name="currencyRowBg">#1E1E1E</color>
+    <color name="currencyRowActiveBg">#3A2E00</color>
+    <color name="keyDarkBg">#333333</color>
+    <color name="keyGrayBg">#A5A5A5</color>
+    <color name="keyOrangeBg">#F0A500</color>
+    <color name="textPrimary">#FFFFFF</color>
+    <color name="textGold">#D4A017</color>
+    <color name="keyDarkText">#FFFFFF</color>
+    <color name="keyGrayText">#000000</color>
+</resources>

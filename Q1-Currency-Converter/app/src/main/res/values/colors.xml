@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <!-- res/values-night/colors.xml  →  LIGHT theme -->
+<resources>
+<color name="windowBackground">#F5F5F5</color>
+<color name="currencyRowBg">#FFFFFF</color>
+<color name="currencyRowActiveBg">#FFF8E1</color>
+<color name="keyDarkBg">#E0E0E0</color>
+<color name="keyGrayBg">#BDBDBD</color>
+<color name="keyOrangeBg">#F0A500</color>
+<color name="textPrimary">#000000</color>
+<color name="textGold">#B8860B</color>
+<color name="keyDarkText">#000000</color>
+<color name="keyGrayText">#000000</color>
+</resources>
