@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_primary">
+
+    <!-- Top Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="8dp"
+        android:paddingEnd="24dp"
+        android:background="@drawable/gradient_header">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/ripple_circle"
+            android:src="@drawable/ic_arrow_back"
+            android:contentDescription="Back"
+            android:padding="12dp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="AUDIO PLAYER"
+            android:textSize="15sp"
+            android:textColor="@color/text_primary"
+            android:letterSpacing="0.2"
+            android:fontFamily="sans-serif-black"
+            android:paddingStart="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="♫"
+            android:textSize="20sp"
+            android:textColor="@color/accent_cyan"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- Album Art Area -->
+            <FrameLayout
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="32dp">
+
+                <View
+                    android:layout_width="220dp"
+                    android:layout_height="220dp"
+                    android:background="@drawable/circle_glow"/>
+
+                <View
+                    android:id="@+id/albumArtView"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/circle_album_bg"/>
+
+                <TextView
+                    android:id="@+id/albumArtIcon"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="♫"
+                    android:textSize="72sp"
+                    android:textColor="@color/accent_cyan"/>
+
+            </FrameLayout>
+
+            <!-- Track Info -->
+            <TextView
+                android:id="@+id/tvTrackTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No Track Selected"
+                android:textSize="22sp"
+                android:textColor="@color/text_primary"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center"
+                android:maxLines="2"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:id="@+id/tvArtist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Unknown Artist"
+                android:textSize="15sp"
+                android:textColor="@color/accent_cyan"
+                android:gravity="center"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+
+            <!-- Neon divider -->
+            <View
+                android:layout_width="80dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/neon_divider"/>
+
+            <!-- Progress Bar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="8dp">
+
+                <SeekBar
+                    android:id="@+id/seekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:progressTint="@color/accent_cyan"
+                    android:thumbTint="@color/accent_cyan"
+                    android:progressBackgroundTint="@color/progress_track"
+                    android:max="100"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tvCurrentTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0:00"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_secondary"
+                        android:fontFamily="monospace"/>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:id="@+id/tvTotalTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0:00"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_secondary"
+                        android:fontFamily="monospace"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Controls -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp">
+
+                <!-- Rewind 10s -->
+                <FrameLayout
+                    android:id="@+id/btnRewind"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/ripple_circle"
+                    android:layout_marginEnd="16dp"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="⏮"
+                        android:textSize="22sp"
+                        android:textColor="@color/text_secondary"/>
+                </FrameLayout>
+
+                <!-- Play/Pause (big) -->
+                <FrameLayout
+                    android:id="@+id/btnPlayPause"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:background="@drawable/gradient_button"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <TextView
+                        android:id="@+id/ivPlayPauseIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="▶"
+                        android:textSize="28sp"
+                        android:textColor="@color/black"/>
+                </FrameLayout>
+
+                <!-- Forward 10s -->
+                <FrameLayout
+                    android:id="@+id/btnForward"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/ripple_circle"
+                    android:layout_marginStart="16dp"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="⏭"
+                        android:textSize="22sp"
+                        android:textColor="@color/text_secondary"/>
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <!-- Pick file button -->
+            <TextView
+                android:id="@+id/btnPickFile"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/gradient_card"
+                android:gravity="center"
+                android:text="⊕  PICK AUDIO FILE"
+                android:textSize="14sp"
+                android:textColor="@color/accent_cyan"
+                android:letterSpacing="0.1"
+                android:fontFamily="sans-serif-medium"
+                android:clickable="true"
+                android:focusable="true"/>
+
+            <!-- Volume -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🔈"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="12dp"/>
+
+                <SeekBar
+                    android:id="@+id/seekVolume"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:progressTint="@color/accent_purple"
+                    android:thumbTint="@color/accent_purple"
+                    android:progressBackgroundTint="@color/progress_track"
+                    android:max="100"
+                    android:progress="80"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🔊"
+                    android:textSize="16sp"
+                    android:layout_marginStart="12dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">Media-Player</string>
+    <string name="app_name">Nova Player</string>
+    <string name="audio_player">Audio Player</string>
+    <string name="video_player">Video Player</string>
+    <string name="pick_audio">Pick Audio File</string>
+    <string name="stream_video">Stream Video</string>
+    <string name="enter_url">Enter stream URL…</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Stop</string>
+    <string name="no_file">No file selected</string>
+    <string name="permission_denied">Storage permission denied</string>
+    <string name="loading">Loading…</string>
 </resources>

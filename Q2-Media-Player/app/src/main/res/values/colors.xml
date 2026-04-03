@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!--  Deep space dark theme  -->
+    <color name="bg_primary">#0A0A0F</color>
+    <color name="bg_surface">#12121A</color>
+    <color name="bg_card">#1A1A26</color>
+    <color name="bg_elevated">#22223A</color>
+    <!--  Neon accents  -->
+    <color name="accent_cyan">#00F5FF</color>
+    <color name="accent_purple">#B24BF3</color>
+    <color name="accent_pink">#FF2D78</color>
+    <color name="accent_gradient_start">#00F5FF</color>
+    <color name="accent_gradient_end">#B24BF3</color>
+    <!--  Text  -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#8A8AB0</color>
+    <color name="text_hint">#44445A</color>
+    <!--  Misc  -->
+    <color name="divider">#1E1E30</color>
+    <color name="ripple">#30B24BF3</color>
+    <color name="progress_track">#22223A</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
 </resources>
