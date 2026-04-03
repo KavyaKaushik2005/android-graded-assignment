@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F0F4FF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sensor Data Monitor"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#1A1A2E"
+                android:layout_gravity="center"
+                android:paddingTop="20dp"
+                android:paddingBottom="24dp"/>
+
+            <!-- ACCELEROMETER CARD -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Accelerometer"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#3D5AFE"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Measures device acceleration (m/s²)"
+                        android:textSize="12sp"
+                        android:textColor="#9E9E9E"
+                        android:layout_marginBottom="16dp"/>
+
+                    <TextView android:id="@+id/tvAccelX"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="X-Axis : 0.000 m/s²"
+                        android:textSize="15sp"
+                        android:textColor="#E53935"
+                        android:layout_marginBottom="6dp"/>
+                    <ProgressBar android:id="@+id/pbAccelX"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:max="1000"
+                        android:layout_marginBottom="14dp"/>
+
+                    <TextView android:id="@+id/tvAccelY"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Y-Axis : 0.000 m/s²"
+                        android:textSize="15sp"
+                        android:textColor="#00897B"
+                        android:layout_marginBottom="6dp"/>
+                    <ProgressBar android:id="@+id/pbAccelY"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:max="1000"
+                        android:layout_marginBottom="14dp"/>
+
+                    <TextView android:id="@+id/tvAccelZ"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Z-Axis : 0.000 m/s²"
+                        android:textSize="15sp"
+                        android:textColor="#F9A825"
+                        android:layout_marginBottom="6dp"/>
+                    <ProgressBar android:id="@+id/pbAccelZ"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:max="1000"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- LIGHT SENSOR CARD -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Light Sensor"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#FB8C00"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Measures ambient light intensity (lux)"
+                        android:textSize="12sp"
+                        android:textColor="#9E9E9E"
+                        android:layout_marginBottom="16dp"/>
+
+                    <TextView android:id="@+id/tvLightValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 lux"
+                        android:textSize="42sp"
+                        android:textStyle="bold"
+                        android:textColor="#FB8C00"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="8dp"/>
+
+                    <TextView android:id="@+id/tvLightCondition"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Condition : Dark"
+                        android:textSize="14sp"
+                        android:textColor="#757575"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="16dp"/>
+
+                    <ProgressBar android:id="@+id/pbLight"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:max="1000"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="4dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dark"
+                            android:textSize="11sp"
+                            android:textColor="#BDBDBD"/>
+                        <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bright"
+                            android:textSize="11sp"
+                            android:textColor="#BDBDBD"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- PROXIMITY SENSOR CARD -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Proximity Sensor"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#8E24AA"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Detects nearby objects (cm)"
+                        android:textSize="12sp"
+                        android:textColor="#9E9E9E"
+                        android:layout_marginBottom="16dp"/>
+
+                    <TextView android:id="@+id/tvProxValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.0 cm"
+                        android:textSize="42sp"
+                        android:textStyle="bold"
+                        android:textColor="#8E24AA"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="8dp"/>
+
+                    <TextView android:id="@+id/tvProxState"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Status : No Object Nearby"
+                        android:textSize="14sp"
+                        android:textColor="#757575"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="16dp"/>
+
+                    <ProgressBar android:id="@+id/pbProximity"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:max="100"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="4dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Near"
+                            android:textSize="11sp"
+                            android:textColor="#BDBDBD"/>
+                        <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Far"
+                            android:textSize="11sp"
+                            android:textColor="#BDBDBD"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
