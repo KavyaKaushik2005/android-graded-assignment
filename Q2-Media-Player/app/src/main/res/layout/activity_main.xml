@@ -1,367 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_primary"
-    android:fillViewport="true">
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="24dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="238dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:gravity="center"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="sans-serif-black"
+        android:letterSpacing="0.3"
+        android:text="MEDIA PLAYER"
+        android:textColor="@color/accent_cyan"
+        android:textSize="36sp" />
 
-        <!-- Header -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Experience Pure Sound and Vision"
+        android:textSize="14sp"
+        android:textColor="@color/text_secondary"
+        android:layout_marginBottom="48dp"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/btnOpenAudio"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:cardCornerRadius="24dp"
+        app:cardBackgroundColor="@color/bg_card"
+        app:strokeColor="@color/accent_cyan"
+        app:strokeWidth="1dp"
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="40dp"
-            android:paddingBottom="32dp"
-            android:gravity="center">
-
-            <!-- Logo glow container -->
-            <FrameLayout
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:layout_gravity="center">
-
-                <View
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
-                    android:background="@drawable/circle_glow"/>
-
-                <TextView
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/circle_album_bg"
-                    android:gravity="center"
-                    android:text="✦"
-                    android:textSize="32sp"
-                    android:textColor="@color/accent_cyan"/>
-            </FrameLayout>
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:padding="24dp"
+            android:orientation="horizontal">
 
             <TextView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="@drawable/circle_album_bg"
+                android:gravity="center"
+                android:text="♫"
+                android:textSize="28sp"
+                android:textColor="@color/accent_cyan"/>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="NOVA"
-                android:textSize="36sp"
-                android:textColor="@color/text_primary"
-                android:letterSpacing="0.3"
-                android:fontFamily="sans-serif-black"/>
+                android:orientation="vertical"
+                android:layout_marginStart="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AUDIO PLAYER"
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif-black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Play from device storage"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/btnOpenVideo"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:cardCornerRadius="24dp"
+        app:cardBackgroundColor="@color/bg_card"
+        app:strokeColor="@color/accent_purple"
+        app:strokeWidth="1dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:padding="24dp"
+            android:orientation="horizontal">
 
             <TextView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="@drawable/circle_album_bg"
+                android:gravity="center"
+                android:text="▶"
+                android:textSize="24sp"
+                android:textColor="@color/accent_purple"
+                android:paddingStart="4dp"/>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="MEDIA PLAYER"
-                android:textSize="11sp"
-                android:textColor="@color/accent_cyan"
-                android:letterSpacing="0.4"
-                android:fontFamily="sans-serif-medium"/>
+                android:orientation="vertical"
+                android:layout_marginStart="20dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VIDEO PLAYER"
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif-black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stream URLs or Local Files"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"/>
+            </LinearLayout>
         </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
-        <!-- Neon divider -->
-        <View
-            android:layout_width="120dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="36dp"
-            android:background="@drawable/neon_divider"/>
-
-        <!-- Audio Card -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/gradient_card"
-            android:orientation="vertical"
-            android:padding="28dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="16dp">
-
-                <FrameLayout
-                    android:layout_width="52dp"
-                    android:layout_height="52dp">
-                    <View
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:background="@drawable/circle_glow"/>
-                    <TextView
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/circle_album_bg"
-                        android:gravity="center"
-                        android:text="♫"
-                        android:textSize="20sp"
-                        android:textColor="@color/accent_cyan"/>
-                </FrameLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:paddingStart="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="AUDIO PLAYER"
-                        android:textSize="13sp"
-                        android:textColor="@color/accent_cyan"
-                        android:letterSpacing="0.15"
-                        android:fontFamily="sans-serif-medium"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="Local Music Files"
-                        android:textSize="22sp"
-                        android:textColor="@color/text_primary"
-                        android:fontFamily="sans-serif-black"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Play any audio file stored on your device. Supports MP3, FLAC, AAC, WAV, OGG and more."
-                android:textSize="14sp"
-                android:textColor="@color/text_secondary"
-                android:lineSpacingMultiplier="1.5"
-                android:layout_marginBottom="24dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="start">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/gradient_card"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp"
-                    android:text="MP3"
-                    android:textSize="11sp"
-                    android:textColor="@color/accent_cyan"
-                    android:layout_marginEnd="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/gradient_card"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp"
-                    android:text="FLAC"
-                    android:textSize="11sp"
-                    android:textColor="@color/accent_purple"
-                    android:layout_marginEnd="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/gradient_card"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp"
-                    android:text="AAC"
-                    android:textSize="11sp"
-                    android:textColor="@color/accent_pink"/>
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/divider"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"/>
-
-            <TextView
-                android:id="@+id/btnOpenAudio"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="@drawable/gradient_button"
-                android:gravity="center"
-                android:text="OPEN AUDIO PLAYER"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:letterSpacing="0.1"
-                android:fontFamily="sans-serif-black"
-                android:clickable="true"
-                android:focusable="true"/>
-
-        </LinearLayout>
-
-        <!-- Video Card -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/gradient_card"
-            android:orientation="vertical"
-            android:padding="28dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="16dp">
-
-                <FrameLayout
-                    android:layout_width="52dp"
-                    android:layout_height="52dp">
-                    <View
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:background="@drawable/circle_glow"/>
-                    <TextView
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/circle_album_bg"
-                        android:gravity="center"
-                        android:text="▶"
-                        android:textSize="20sp"
-                        android:textColor="@color/accent_purple"/>
-                </FrameLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:paddingStart="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="VIDEO STREAM"
-                        android:textSize="13sp"
-                        android:textColor="@color/accent_purple"
-                        android:letterSpacing="0.15"
-                        android:fontFamily="sans-serif-medium"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="Stream from URL"
-                        android:textSize="22sp"
-                        android:textColor="@color/text_primary"
-                        android:fontFamily="sans-serif-black"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Stream videos directly from any URL. Supports HLS, DASH, MP4 streams, and more formats."
-                android:textSize="14sp"
-                android:textColor="@color/text_secondary"
-                android:lineSpacingMultiplier="1.5"
-                android:layout_marginBottom="24dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="start">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/gradient_card"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp"
-                    android:text="HLS"
-                    android:textSize="11sp"
-                    android:textColor="@color/accent_purple"
-                    android:layout_marginEnd="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/gradient_card"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp"
-                    android:text="DASH"
-                    android:textSize="11sp"
-                    android:textColor="@color/accent_cyan"
-                    android:layout_marginEnd="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/gradient_card"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp"
-                    android:text="MP4"
-                    android:textSize="11sp"
-                    android:textColor="@color/accent_pink"/>
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/divider"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"/>
-
-            <TextView
-                android:id="@+id/btnOpenVideo"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="@drawable/gradient_button"
-                android:gravity="center"
-                android:text="OPEN VIDEO PLAYER"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:letterSpacing="0.1"
-                android:fontFamily="sans-serif-black"
-                android:clickable="true"
-                android:focusable="true"/>
-
-        </LinearLayout>
-
-        <!-- Footer -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nova Player • Built with ExoPlayer"
-            android:textSize="12sp"
-            android:textColor="@color/text_hint"
-            android:gravity="center"
-            android:paddingTop="16dp"
-            android:paddingBottom="32dp"/>
-
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>

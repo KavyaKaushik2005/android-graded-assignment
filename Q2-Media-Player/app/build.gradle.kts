@@ -1,18 +1,20 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
-    namespace = "com.example.media_player"   // ← change to YOUR package name
-    compileSdk = 35
+    namespace = "com.example.media_player"
+    compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.media_player"  // ← change to YOUR package name
+        applicationId = "com.example.media_player"
         minSdk = 21
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -26,21 +28,30 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = "21"
+        jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 }
 
 dependencies {
-    implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("com.google.android.material:material:1.12.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.media3:media3-exoplayer:1.4.1")
-    implementation("androidx.media3:media3-ui:1.4.1")
-    implementation("androidx.media3:media3-exoplayer-hls:1.4.1")
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.constraintlayout)
     implementation(libs.activity)
+    
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.ui)
+    implementation(libs.media3.exoplayer.hls)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.ext.junit)
+    androidTestImplementation(libs.espresso.core)
 }

@@ -37,7 +37,7 @@
         <activity
             android:name=".VideoPlayerActivity"
             android:exported="false"
-            android:screenOrientation="landscape"
+            android:screenOrientation="sensorPortrait"
             android:configChanges="orientation|screenSize|keyboardHidden"/>
 
     </application>
