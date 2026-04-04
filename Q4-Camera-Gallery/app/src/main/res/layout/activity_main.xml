@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,44 +8,78 @@
     android:background="@color/background"
     tools:context=".MainActivity">
 
+    <!-- Subtle top glow circle for atmosphere -->
+    <View
+        android:id="@+id/glowTop"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
+        android:background="@drawable/bg_glow_circle"
+        android:alpha="0.18"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="-80dp"
+        android:layout_marginTop="-80dp"/>
+
+    <!-- Tag pill -->
+    <TextView
+        android:id="@+id/tvTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="72dp"
+        android:background="@drawable/bg_accent_pill"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="6dp"
+        android:text="PHOTO MANAGER"
+        android:textColor="@color/primary"
+        android:textSize="10sp"
+        android:letterSpacing="0.15"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!-- Main title -->
     <TextView
         android:id="@+id/tvHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="64dp"
-        android:text="Lens &amp; Library"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="12dp"
+        android:text="Lens &amp;\nLibrary"
         android:textColor="@color/text_primary"
-        android:textSize="32sp"
+        android:textSize="44sp"
         android:textStyle="bold"
-        android:letterSpacing="-0.02"
+        android:letterSpacing="-0.03"
+        android:lineSpacingMultiplier="0.95"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tvTag"/>
 
+    <!-- Subtitle -->
     <TextView
         android:id="@+id/tvSubHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="10dp"
         android:text="Capture and explore your memories"
         android:textColor="@color/text_secondary"
-        android:textSize="16sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvHeader" />
+        app:layout_constraintTop_toBottomOf="@id/tvHeader"/>
 
+    <!-- Take Photo card -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/btnTakePhotoCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="44dp"
         android:clickable="true"
         android:focusable="true"
-        app:cardCornerRadius="24dp"
+        app:cardCornerRadius="28dp"
         app:cardElevation="0dp"
         app:strokeWidth="1dp"
-        app:strokeColor="@color/divider"
+        app:strokeColor="@color/divider_strong"
         app:cardBackgroundColor="@color/surface"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,17 +90,21 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="24dp">
+            android:padding="22dp">
 
-            <TextView
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:background="@drawable/ic_launcher_background"
-                android:backgroundTint="@color/primary_light"
-                android:gravity="center"
-                android:text="📸"
-                android:textSize="28sp"
-                android:layout_marginEnd="20dp"/>
+            <!-- Icon container -->
+            <FrameLayout
+                android:layout_width="62dp"
+                android:layout_height="62dp"
+                android:background="@drawable/bg_icon_camera"
+                android:layout_marginEnd="18dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="📸"
+                    android:textSize="28sp"/>
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -79,30 +118,43 @@
                     android:text="Take Photo"
                     android:textColor="@color/primary"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:letterSpacing="-0.01"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
                     android:text="Instantly capture a moment"
                     android:textColor="@color/text_secondary"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"/>
             </LinearLayout>
+
+            <!-- Arrow indicator -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="›"
+                android:textColor="@color/text_tertiary"
+                android:textSize="28sp"
+                android:layout_marginStart="8dp"/>
+
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
+    <!-- Open Gallery card -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/btnChooseFolderCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="14dp"
         android:clickable="true"
         android:focusable="true"
-        app:cardCornerRadius="24dp"
+        app:cardCornerRadius="28dp"
         app:cardElevation="0dp"
         app:strokeWidth="1dp"
-        app:strokeColor="@color/divider"
+        app:strokeColor="@color/divider_strong"
         app:cardBackgroundColor="@color/surface"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -113,17 +165,21 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="24dp">
+            android:padding="22dp">
 
-            <TextView
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:background="@drawable/ic_launcher_background"
-                android:backgroundTint="@color/secondary_light"
-                android:gravity="center"
-                android:text="🖼"
-                android:textSize="28sp"
-                android:layout_marginEnd="20dp"/>
+            <!-- Icon container -->
+            <FrameLayout
+                android:layout_width="62dp"
+                android:layout_height="62dp"
+                android:background="@drawable/bg_icon_gallery"
+                android:layout_marginEnd="18dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="🖼️"
+                    android:textSize="28sp"/>
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -137,16 +193,39 @@
                     android:text="Open Gallery"
                     android:textColor="@color/secondary"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:letterSpacing="-0.01"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
                     android:text="Browse your collection"
                     android:textColor="@color/text_secondary"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"/>
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="›"
+                android:textColor="@color/text_tertiary"
+                android:textSize="28sp"
+                android:layout_marginStart="8dp"/>
+
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
+
+    <!-- Bottom tagline -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your moments, beautifully organized."
+        android:textColor="@color/text_tertiary"
+        android:textSize="12sp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
