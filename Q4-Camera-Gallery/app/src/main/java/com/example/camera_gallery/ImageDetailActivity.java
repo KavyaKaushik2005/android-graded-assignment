@@ -1,9 +1,10 @@
 package com.example.camera_gallery;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
@@ -25,15 +26,29 @@ public class ImageDetailActivity extends AppCompatActivity {
         String folderUriStr = getIntent().getStringExtra("folderUri");
         Uri imageUri        = Uri.parse(imageUriStr);
 
-        ImageView   ivPreview = findViewById(R.id.ivPreview);
-        TextView    tvName    = findViewById(R.id.tvName);
-        TextView    tvPath    = findViewById(R.id.tvPath);
-        TextView    tvSize    = findViewById(R.id.tvSize);
-        TextView    tvDate    = findViewById(R.id.tvDate);
-        LinearLayout btnDelete = findViewById(R.id.btnDelete);
+        ImageView ivPreview = findViewById(R.id.ivPreview);
+        TextView tvName    = findViewById(R.id.tvName);
+        TextView tvPath    = findViewById(R.id.tvPath);
+        TextView tvSize    = findViewById(R.id.tvSize);
+        TextView tvDate    = findViewById(R.id.tvDate);
+        View btnDelete     = findViewById(R.id.btnDelete);
+
+        // Set up toolbar navigation
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Image Details");
+        }
+        
+        // Alternatively, if using the custom Toolbar in XML
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            toolbar.setNavigationOnClickListener(v -> onBackPressed());
+        }
 
         // Load image
-        Glide.with(this).load(imageUri).into(ivPreview);
+        Glide.with(this)
+                .load(imageUri)
+                .into(ivPreview);
 
         // File details
         DocumentFile file = DocumentFile.fromSingleUri(this, imageUri);

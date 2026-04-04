@@ -1,8 +1,8 @@
 package com.example.camera_gallery;
 
-
 import android.content.Context;
 import android.net.Uri;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -12,32 +12,52 @@ import java.util.List;
 
 public class ImageGridAdapter extends BaseAdapter {
 
-    Context context;
-    List<Uri> imageUris;
+    private final Context context;
+    private final List<Uri> imageUris;
 
     public ImageGridAdapter(Context context, List<Uri> imageUris) {
-        this.context   = context;
+        this.context = context;
         this.imageUris = imageUris;
     }
 
-    @Override public int getCount()                    { return imageUris.size(); }
-    @Override public Object getItem(int pos)           { return imageUris.get(pos); }
-    @Override public long getItemId(int pos)           { return pos; }
+    @Override
+    public int getCount() {
+        return imageUris.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return imageUris.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
-
+        ViewHolder holder;
         if (convertView == null) {
-            imageView = new ImageView(context);
-            imageView.setLayoutParams(new ViewGroup.LayoutParams(250, 250));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            convertView = LayoutInflater.from(context).inflate(R.layout.activity_image_grid_adapter, parent, false);
+            holder = new ViewHolder();
+            holder.imageView = convertView.findViewById(R.id.ivGridItem);
+            convertView.setTag(holder);
         } else {
-            imageView = (ImageView) convertView;
+            holder = (ViewHolder) convertView.getTag();
         }
 
-        // Load image using Glide
-        Glide.with(context).load(imageUris.get(position)).into(imageView);
-        return imageView;
+        Glide.with(context)
+                .load(imageUris.get(position))
+                .centerCrop()
+                .placeholder(android.R.drawable.ic_menu_gallery)
+                .error(android.R.drawable.ic_menu_report_image)
+                .into(holder.imageView);
+
+        return convertView;
+    }
+
+    static class ViewHolder {
+        ImageView imageView;
     }
 }

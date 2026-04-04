@@ -7,7 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.content.Intent;
-import android.widget.LinearLayout;
+import android.view.View;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -24,24 +24,28 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityResultLauncher<Uri> cameraLauncher = registerForActivityResult(
             new ActivityResultContracts.TakePicture(), success -> {
-                if (success) Toast.makeText(this, "✅ Photo saved!", Toast.LENGTH_SHORT).show();
-                else         Toast.makeText(this, "Photo cancelled.", Toast.LENGTH_SHORT).show();
-            });
-
-    ActivityResultLauncher<Uri> folderLauncher = registerForActivityResult(
-            new ActivityResultContracts.OpenDocumentTree(), uri -> {
-                if (uri != null) {
-                    Intent intent = new Intent(this, GalleryActivity.class);
-                    intent.putExtra("folderUri", uri.toString());
-                    startActivity(intent);
+                if (success) {
+                    Toast.makeText(this, "Photo saved successfully!", Toast.LENGTH_SHORT).show();
+                    openGallery();
+                } else {
+                    Toast.makeText(this, "Camera cancelled.", Toast.LENGTH_SHORT).show();
                 }
             });
 
     ActivityResultLauncher<String[]> permissionLauncher = registerForActivityResult(
             new ActivityResultContracts.RequestMultiplePermissions(), result -> {
-                boolean granted = !result.containsValue(false);
-                if (granted) openCamera();
-                else Toast.makeText(this, "Permission denied!", Toast.LENGTH_SHORT).show();
+                boolean granted = true;
+                for (Boolean isGranted : result.values()) {
+                    if (isGranted == null || !isGranted) {
+                        granted = false;
+                        break;
+                    }
+                }
+                if (granted) {
+                    openCamera();
+                } else {
+                    Toast.makeText(this, "Permissions are required to use the camera.", Toast.LENGTH_SHORT).show();
+                }
             });
 
     @Override
@@ -49,19 +53,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LinearLayout btnTakePhoto    = findViewById(R.id.btnTakePhoto);
-        LinearLayout btnChooseFolder = findViewById(R.id.btnChooseFolder);
+        View btnTakePhotoCard = findViewById(R.id.btnTakePhotoCard);
+        View btnChooseFolderCard = findViewById(R.id.btnChooseFolderCard);
 
-        btnTakePhoto.setOnClickListener(v -> checkPermissionsAndOpenCamera());
-        btnChooseFolder.setOnClickListener(v -> folderLauncher.launch(null));
+        btnTakePhotoCard.setOnClickListener(v -> checkPermissionsAndOpenCamera());
+        btnChooseFolderCard.setOnClickListener(v -> openGallery());
+    }
+
+    void openGallery() {
+        Intent intent = new Intent(this, GalleryActivity.class);
+        startActivity(intent);
     }
 
     void checkPermissionsAndOpenCamera() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)
+            if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 openCamera();
-            else
+            } else {
                 permissionLauncher.launch(new String[]{Manifest.permission.CAMERA});
+            }
         } else {
             permissionLauncher.launch(new String[]{
                     Manifest.permission.CAMERA,
@@ -71,13 +81,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void openCamera() {
-        String filename = "IMG_" + new SimpleDateFormat("yyyyMMdd_HHmmss",
-                Locale.getDefault()).format(new Date()) + ".jpg";
-        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        File photoFile  = new File(storageDir, filename);
+        try {
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+            String filename = "IMG_" + timeStamp + ".jpg";
+            
+            File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+            if (storageDir != null && !storageDir.exists()) storageDir.mkdirs();
 
-        photoUri = FileProvider.getUriForFile(this,
-                getPackageName() + ".fileprovider", photoFile);
-        cameraLauncher.launch(photoUri);
+            File photoFile = new File(storageDir, filename);
+
+            photoUri = FileProvider.getUriForFile(this,
+                    getPackageName() + ".fileprovider", photoFile);
+            cameraLauncher.launch(photoUri);
+        } catch (Exception e) {
+            Toast.makeText(this, "Failed to initialize camera: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

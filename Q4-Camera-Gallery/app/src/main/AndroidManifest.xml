@@ -12,7 +12,7 @@
     <application
         android:allowBackup="true"
         android:label="Photo Manager"
-        android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+        android:theme="@style/Theme.CameraGallery">
 
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
@@ -21,8 +21,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".GalleryActivity"/>
-        <activity android:name=".ImageDetailActivity"/>
+        <activity android:name=".GalleryActivity"
+            android:theme="@style/Theme.CameraGallery"/>
+        <activity android:name=".ImageDetailActivity"
+            android:theme="@style/Theme.CameraGallery"/>
 
         <!-- Required for FileProvider (camera photo saving) -->
         <provider
