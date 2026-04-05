@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dark_bg">#0D0D1A</color>
+    <color name="dark_card">#1A1A2E</color>
+    <color name="dark_text_primary">#E8EAFF</color>
+    <color name="dark_text_secondary">#8888AA</color>
+    <color name="dark_accent_blue">#7B8CFF</color>
+    <color name="dark_accent_orange">#FFA040</color>
+    <color name="dark_accent_purple">#C47EFF</color>
 </resources>

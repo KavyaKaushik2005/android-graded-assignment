@@ -1,7 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.SensorApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <style name="Base.Theme.SensorApp" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">#7B8CFF</item>
+        <item name="colorOnPrimary">#0D0D1A</item>
+        <item name="colorPrimaryContainer">#1A1A2E</item>
+        <item name="colorSurface">#1A1A2E</item>
+        <item name="colorOnSurface">#E8EAFF</item>
+        <item name="android:windowBackground">#0D0D1A</item>
+        <item name="android:statusBarColor">#0D0D1A</item>
+        <item name="android:navigationBarColor">#0D0D1A</item>
     </style>
+
+    <style name="Theme.SensorApp" parent="Base.Theme.SensorApp" />
 </resources>

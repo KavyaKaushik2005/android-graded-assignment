@@ -6,21 +6,27 @@
     <color name="cardBorder">#3D3860</color>
     <color name="surfaceElevated">#322D4A</color>
 
+    <!-- Keypad -->
     <color name="keyDarkBg">#2E2A45</color>
     <color name="keyGrayBg">#38344F</color>
     <color name="keyOrangeBg">#B39DDB</color>
 
+    <!-- Text -->
     <color name="textPrimary">#EDE7F6</color>
     <color name="textSecondary">#9E97C0</color>
     <color name="textGold">#CE93D8</color>
     <color name="textGoldLight">#F3B8FF</color>
 
+    <!-- Key text -->
     <color name="keyDarkText">#D1C4E9</color>
-    <color name="keyGrayText">#B0AACF</color>
+    <color name="keyGrayText">#FFFFFF</color>
+    <color name="keyClearText">#F3B8FF</color>
 
+    <!-- Accent (pastel lavender-pink) -->
     <color name="accentGold">#CE93D8</color>
     <color name="divider">#2E2A45</color>
 
+    <!-- Currency rows -->
     <color name="currencyRowBg">#2A2640</color>
     <color name="currencyRowActiveBg">#3D2F55</color>
 </resources>
