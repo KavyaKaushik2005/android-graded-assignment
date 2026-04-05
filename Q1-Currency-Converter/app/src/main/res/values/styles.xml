@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <!-- ── Base Keypad Button ── -->
     <style name="KeypadButtonBase">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
@@ -18,22 +16,13 @@
         <item name="backgroundTint">@null</item>
     </style>
 
-    <!-- Gray Button (C, ←, %) -->
     <style name="KeypadButtonGray" parent="KeypadButtonBase">
         <item name="android:background">@drawable/bg_key_gray</item>
         <item name="android:textColor">@color/keyGrayText</item>
     </style>
 
-    <!-- Dark Button (0–9, dot) -->
     <style name="KeypadButtonDark" parent="KeypadButtonBase">
         <item name="android:background">@drawable/bg_key_dark</item>
         <item name="android:textColor">@color/keyDarkText</item>
     </style>
-
-    <!-- Orange Button (÷ × − + =) -->
-    <style name="KeypadButtonOrange" parent="KeypadButtonBase">
-        <item name="android:background">@drawable/bg_key_orange</item>
-        <item name="android:textColor">#FFFFFF</item>
-    </style>
-
 </resources>

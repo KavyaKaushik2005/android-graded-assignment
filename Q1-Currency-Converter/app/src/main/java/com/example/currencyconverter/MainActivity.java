@@ -1,52 +1,53 @@
-package com.example.currencyconverter; // ← Change this to your actual package name
+package com.example.currencyconverter;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import androidx.appcompat.app.AlertDialog;
+import android.widget.Spinner;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 public class MainActivity extends AppCompatActivity {
 
-    // ── Exchange rates relative to INR ──
     private static final double INR_TO_USD = 0.012;
     private static final double INR_TO_JPY = 1.78;
     private static final double INR_TO_EUR = 0.011;
 
     private static final String PREFS_NAME = "AppSettings";
-    private static final String KEY_THEME  = "theme"; // "dark" or "light"
+    private static final String KEY_THEME  = "theme";
 
-    private EditText etINR, etUSD, etJPY, etEUR;
-    private boolean isUpdating = false;
+    private Spinner spinnerFrom, spinnerTo;
+    private EditText etSpinnerInput;
+    private TextView tvSpinnerResult;
+    private TextView tvRateHint;
+
+    private final String[] CURRENCIES = {"INR", "USD", "JPY", "EUR"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Apply saved theme BEFORE setContentView
         applyThemeFromPrefs();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // ── Bind views ──
-        etINR = findViewById(R.id.etINR);
-        etUSD = findViewById(R.id.etUSD);
-        etJPY = findViewById(R.id.etJPY);
-        etEUR = findViewById(R.id.etEUR);
+        spinnerFrom     = findViewById(R.id.spinnerFrom);
+        spinnerTo       = findViewById(R.id.spinnerTo);
+        etSpinnerInput  = findViewById(R.id.etSpinnerInput);
+        tvSpinnerResult = findViewById(R.id.tvSpinnerResult);
+        tvRateHint      = findViewById(R.id.tvRateHint);
 
         ImageButton btnSettings = findViewById(R.id.btnSettings);
+        Button btnSwap      = findViewById(R.id.btnSwap);
         Button btnClear     = findViewById(R.id.btnClear);
         Button btnBackspace = findViewById(R.id.btnBackspace);
-        Button btnPercent   = findViewById(R.id.btnPercent);
-        Button btnDivide    = findViewById(R.id.btnDivide);
-        Button btnMultiply  = findViewById(R.id.btnMultiply);
-        Button btnMinus     = findViewById(R.id.btnMinus);
-        Button btnPlus      = findViewById(R.id.btnPlus);
-        Button btnEquals    = findViewById(R.id.btnEquals);
         Button btn0  = findViewById(R.id.btn0);
         Button btn1  = findViewById(R.id.btn1);
         Button btn2  = findViewById(R.id.btn2);
@@ -59,81 +60,75 @@ public class MainActivity extends AppCompatActivity {
         Button btn9  = findViewById(R.id.btn9);
         Button btnDot = findViewById(R.id.btnDot);
 
-        // ── Active field tracking ──
-        final EditText[] activeField = {etINR};
-        etINR.setOnClickListener(v -> activeField[0] = etINR);
-        etUSD.setOnClickListener(v -> activeField[0] = etUSD);
-        etJPY.setOnClickListener(v -> activeField[0] = etJPY);
-        etEUR.setOnClickListener(v -> activeField[0] = etEUR);
+        // Custom adapter so spinner text is visible on dark/pastel background
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this, R.layout.spinner_item, CURRENCIES);
+        adapter.setDropDownViewResource(R.layout.spinner_item);
+        spinnerFrom.setAdapter(adapter);
+        spinnerTo.setAdapter(adapter);
+        spinnerTo.setSelection(1);
 
-        // ── Settings button → show theme dialog ──
-        btnSettings.setOnClickListener(v -> showThemeDialog());
+        AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
+            @Override public void onItemSelected(AdapterView<?> p, View v, int pos, long id) {
+                updateSpinnerResult();
+                updateRateHint();
+            }
+            @Override public void onNothingSelected(AdapterView<?> p) {}
+        };
+        spinnerFrom.setOnItemSelectedListener(spinnerListener);
+        spinnerTo.setOnItemSelectedListener(spinnerListener);
 
-        // ── Digit buttons ──
-        btn0.setOnClickListener(v -> appendToField(activeField[0], "0"));
-        btn1.setOnClickListener(v -> appendToField(activeField[0], "1"));
-        btn2.setOnClickListener(v -> appendToField(activeField[0], "2"));
-        btn3.setOnClickListener(v -> appendToField(activeField[0], "3"));
-        btn4.setOnClickListener(v -> appendToField(activeField[0], "4"));
-        btn5.setOnClickListener(v -> appendToField(activeField[0], "5"));
-        btn6.setOnClickListener(v -> appendToField(activeField[0], "6"));
-        btn7.setOnClickListener(v -> appendToField(activeField[0], "7"));
-        btn8.setOnClickListener(v -> appendToField(activeField[0], "8"));
-        btn9.setOnClickListener(v -> appendToField(activeField[0], "9"));
+        btnSettings.setOnClickListener(v ->
+                startActivity(new Intent(this, SettingsActivity.class)));
+
+        btnSwap.setOnClickListener(v -> {
+            int fromPos = spinnerFrom.getSelectedItemPosition();
+            int toPos   = spinnerTo.getSelectedItemPosition();
+            spinnerFrom.setSelection(toPos);
+            spinnerTo.setSelection(fromPos);
+        });
+
+        btn0.setOnClickListener(v -> appendToInput("0"));
+        btn1.setOnClickListener(v -> appendToInput("1"));
+        btn2.setOnClickListener(v -> appendToInput("2"));
+        btn3.setOnClickListener(v -> appendToInput("3"));
+        btn4.setOnClickListener(v -> appendToInput("4"));
+        btn5.setOnClickListener(v -> appendToInput("5"));
+        btn6.setOnClickListener(v -> appendToInput("6"));
+        btn7.setOnClickListener(v -> appendToInput("7"));
+        btn8.setOnClickListener(v -> appendToInput("8"));
+        btn9.setOnClickListener(v -> appendToInput("9"));
 
         btnDot.setOnClickListener(v -> {
-            String current = activeField[0].getText().toString();
+            String current = etSpinnerInput.getText().toString();
             if (!current.contains(".")) {
-                appendToField(activeField[0], current.isEmpty() ? "0." : ".");
+                appendToInput(current.isEmpty() ? "0." : ".");
             }
         });
 
         btnClear.setOnClickListener(v -> {
-            isUpdating = true;
-            etINR.setText("");
-            etUSD.setText("");
-            etJPY.setText("");
-            etEUR.setText("");
-            isUpdating = false;
+            etSpinnerInput.setText("");
+            tvSpinnerResult.setText("0");
         });
 
         btnBackspace.setOnClickListener(v -> {
-            String current = activeField[0].getText().toString();
+            String current = etSpinnerInput.getText().toString();
             if (!current.isEmpty()) {
                 String newVal = current.substring(0, current.length() - 1);
-                activeField[0].setText(newVal);
-                activeField[0].setSelection(newVal.length());
-                convertFrom(activeField[0]);
+                etSpinnerInput.setText(newVal);
+                etSpinnerInput.setSelection(newVal.length());
+                updateSpinnerResult();
             }
         });
 
-        btnPercent.setOnClickListener(v -> {
-            String current = activeField[0].getText().toString();
-            if (!current.isEmpty()) {
-                try {
-                    double val = Double.parseDouble(current) / 100.0;
-                    activeField[0].setText(formatNumber(val));
-                    convertFrom(activeField[0]);
-                } catch (NumberFormatException ignored) {}
-            }
+        etSpinnerInput.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int a, int b, int c) {}
+            @Override public void onTextChanged(CharSequence s, int a, int b, int c) {}
+            @Override public void afterTextChanged(Editable s) { updateSpinnerResult(); }
         });
 
-        btnDivide.setOnClickListener(v -> {});
-        btnMultiply.setOnClickListener(v -> {});
-        btnMinus.setOnClickListener(v -> {});
-        btnPlus.setOnClickListener(v -> {});
-        btnEquals.setOnClickListener(v -> convertFrom(activeField[0]));
-
-        // ── TextWatchers ──
-        etINR.addTextChangedListener(makeWatcher(etINR));
-        etUSD.addTextChangedListener(makeWatcher(etUSD));
-        etJPY.addTextChangedListener(makeWatcher(etJPY));
-        etEUR.addTextChangedListener(makeWatcher(etEUR));
+        updateRateHint();
     }
-
-    // ────────────────────────────────────────────
-    //  THEME
-    // ────────────────────────────────────────────
 
     private void applyThemeFromPrefs() {
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
@@ -145,82 +140,56 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void showThemeDialog() {
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        String currentTheme = prefs.getString(KEY_THEME, "dark");
-        int checkedItem = currentTheme.equals("light") ? 1 : 0;
-        String[] options = {"🌙  Dark Mode", "☀️  Light Mode"};
-
-        new AlertDialog.Builder(this)
-                .setTitle("Choose Theme")
-                .setSingleChoiceItems(options, checkedItem, (dialog, which) -> {
-                    String selected = (which == 1) ? "light" : "dark";
-                    // Save preference
-                    prefs.edit().putString(KEY_THEME, selected).apply();
-                    // Apply — this recreates the activity automatically
-                    if (selected.equals("light")) {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    } else {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    }
-                    dialog.dismiss();
-                })
-                .setNegativeButton("Cancel", null)
-                .show();
-    }
-
-    // ────────────────────────────────────────────
-    //  CONVERTER
-    // ────────────────────────────────────────────
-
-    private void appendToField(EditText field, String character) {
-        String current = field.getText().toString();
+    private void appendToInput(String character) {
+        String current = etSpinnerInput.getText().toString();
         if (current.equals("0") && !character.equals(".")) current = "";
         String newVal = current + character;
-        field.setText(newVal);
-        field.setSelection(newVal.length());
+        etSpinnerInput.setText(newVal);
+        etSpinnerInput.setSelection(newVal.length());
     }
 
-    private TextWatcher makeWatcher(EditText source) {
-        return new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
-            @Override public void afterTextChanged(Editable s) {
-                if (!isUpdating) convertFrom(source);
-            }
-        };
-    }
-
-    private void convertFrom(EditText source) {
-        if (isUpdating) return;
-        String text = source.getText().toString().trim();
+    private void updateSpinnerResult() {
+        String text = etSpinnerInput.getText().toString().trim();
         if (text.isEmpty() || text.equals(".")) {
-            isUpdating = true;
-            if (source != etINR) etINR.setText("");
-            if (source != etUSD) etUSD.setText("");
-            if (source != etJPY) etJPY.setText("");
-            if (source != etEUR) etEUR.setText("");
-            isUpdating = false;
+            tvSpinnerResult.setText("0");
             return;
         }
-        double inputValue;
-        try {
-            inputValue = Double.parseDouble(text);
-        } catch (NumberFormatException e) {
-            return;
-        }
-        double inrValue;
-        if      (source == etINR) inrValue = inputValue;
-        else if (source == etUSD) inrValue = inputValue / INR_TO_USD;
-        else if (source == etJPY) inrValue = inputValue / INR_TO_JPY;
-        else                      inrValue = inputValue / INR_TO_EUR;
+        double inputVal;
+        try { inputVal = Double.parseDouble(text); }
+        catch (NumberFormatException e) { return; }
 
-        isUpdating = true;
-        if (source != etINR) etINR.setText(formatNumber(inrValue));
-        if (source != etUSD) etUSD.setText(formatNumber(inrValue * INR_TO_USD));
-        if (source != etJPY) etJPY.setText(formatNumber(inrValue * INR_TO_JPY));
-        if (source != etEUR) etEUR.setText(formatNumber(inrValue * INR_TO_EUR));
-        isUpdating = false;
+        int fromPos = spinnerFrom.getSelectedItemPosition();
+        int toPos   = spinnerTo.getSelectedItemPosition();
+        double inrVal = toInr(inputVal, fromPos);
+        double result = fromInr(inrVal, toPos);
+        tvSpinnerResult.setText(formatNumber(result));
+    }
+
+    private void updateRateHint() {
+        int fromPos = spinnerFrom.getSelectedItemPosition();
+        int toPos   = spinnerTo.getSelectedItemPosition();
+        double rate = fromInr(toInr(1.0, fromPos), toPos);
+        tvRateHint.setText("1 " + CURRENCIES[fromPos] + " = " + formatNumber(rate) + " " + CURRENCIES[toPos]);
+    }
+
+    private double toInr(double value, int pos) {
+        switch (pos) {
+            case 0: return value;
+            case 1: return value / INR_TO_USD;
+            case 2: return value / INR_TO_JPY;
+            case 3: return value / INR_TO_EUR;
+            default: return value;
+        }
+    }
+
+    private double fromInr(double inrValue, int pos) {
+        switch (pos) {
+            case 0: return inrValue;
+            case 1: return inrValue * INR_TO_USD;
+            case 2: return inrValue * INR_TO_JPY;
+            case 3: return inrValue * INR_TO_EUR;
+            default: return inrValue;
+        }
     }
 
     private String formatNumber(double value) {

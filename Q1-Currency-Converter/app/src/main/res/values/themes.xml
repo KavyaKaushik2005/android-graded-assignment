@@ -1,27 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <style name="Theme.CurrencyConverter" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-
-        <!-- Window background changes with dark/light -->
         <item name="android:windowBackground">@color/windowBackground</item>
-
-        <!-- Status bar and nav bar follow theme -->
         <item name="android:statusBarColor">@color/windowBackground</item>
         <item name="android:navigationBarColor">@color/windowBackground</item>
-
-        <!-- Gold as primary accent -->
-        <item name="colorPrimary">#D4A017</item>
-        <item name="colorPrimaryVariant">#A07010</item>
+        <item name="colorPrimary">#CE93D8</item>
+        <item name="colorPrimaryVariant">#AB47BC</item>
         <item name="colorOnPrimary">#FFFFFF</item>
-
-        <!-- Surface colors for dialogs, cards -->
-        <item name="colorSurface">@color/currencyRowBg</item>
+        <item name="colorSurface">@color/cardBackground</item>
         <item name="colorOnSurface">@color/textPrimary</item>
-
-        <!-- CRITICAL: stop Material tinting buttons with colorPrimary -->
         <item name="backgroundTint">@null</item>
-
     </style>
-
 </resources>
