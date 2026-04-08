@@ -1,14 +1,12 @@
 package com.example.currencyconverter;
 
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.content.ContextCompat;
 
 public class SettingsActivity extends AppCompatActivity {
 

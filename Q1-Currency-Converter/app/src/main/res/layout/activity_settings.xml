@@ -112,7 +112,6 @@
                     android:orientation="horizontal"
                     android:gravity="center">
 
-                    <!-- Dark Mode button -->
                     <Button
                         android:id="@+id/btnDarkMode"
                         android:layout_width="0dp"

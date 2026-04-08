@@ -29,4 +29,10 @@
     <!-- Currency rows -->
     <color name="currencyRowBg">#FFFFFF</color>
     <color name="currencyRowActiveBg">#F3E5F5</color>
+
+
+<!-- Dark Theme Highlights (values-night) -->
+    <!-- <color name="windowBackground">#1E1B2E</color> -->
+
+    <!-- <color name="accentGold">#CE93D8</color> -->
 </resources>
